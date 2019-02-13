@@ -2,10 +2,14 @@ package io.jatoms.osgi.patterns;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Deactivate;
 import org.osgi.service.component.annotations.Reference;
+import org.osgi.service.component.annotations.ReferencePolicy;
 import org.osgi.service.component.annotations.ReferencePolicyOption;
 
 import io.jatoms.osgi.patterns.api.ITask;
@@ -13,15 +17,30 @@ import io.jatoms.osgi.patterns.api.ITask;
 @Component
 public class TaskWhiteboard {
 
-    @Reference(policyOption=ReferencePolicyOption.GREEDY)
+    @Reference(policy=ReferencePolicy.DYNAMIC, policyOption=ReferencePolicyOption.GREEDY)
     private List<ITask> tasks = new CopyOnWriteArrayList<>();
 
-    
+    private Executor exec = Executors.newSingleThreadExecutor();
+
+    private volatile boolean stopped = false;
 
     @Activate
     void activate () {
-
+        exec.execute(() -> {
+            while(!stopped){
+                tasks.forEach((task)->{
+                    try {
+                        task.run();
+                    } catch (Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
+            }
+        });
     }
 
-
+    @Deactivate
+    void deactivate() {
+        stopped = true;
+    }
 }
