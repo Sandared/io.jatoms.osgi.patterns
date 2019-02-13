@@ -17,12 +17,8 @@ import io.jatoms.osgi.patterns.api.ITask;
 
 @Component
 public class TaskWhiteboard {
-
-    @Reference(cardinality=ReferenceCardinality.MULTIPLE, policy=ReferencePolicy.DYNAMIC, policyOption=ReferencePolicyOption.GREEDY)
     private List<ITask> tasks = new CopyOnWriteArrayList<>();
-
     private Executor exec = Executors.newSingleThreadExecutor();
-
     private volatile boolean stopped = false;
 
     @Activate
@@ -48,5 +44,14 @@ public class TaskWhiteboard {
     @Deactivate
     void deactivate() {
         stopped = true;
+    }
+
+    @Reference(cardinality=ReferenceCardinality.MULTIPLE, policy=ReferencePolicy.DYNAMIC, policyOption=ReferencePolicyOption.GREEDY)
+    void addTask(ITask task){
+        tasks.add(task);
+    }
+
+    void removeTask(ITask task){
+        tasks.remove(task);
     }
 }

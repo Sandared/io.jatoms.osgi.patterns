@@ -19,6 +19,11 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
+            <groupId>io.jatoms</groupId>
+            <artifactId>itask.simple</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>org.osgi.enroute</groupId>
             <artifactId>osgi-api</artifactId>
             <type>pom</type>
