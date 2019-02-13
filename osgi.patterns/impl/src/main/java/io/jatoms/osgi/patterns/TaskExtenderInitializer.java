@@ -5,7 +5,7 @@ import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
 
-@Component
+@Component(enabled=false)
 public class TaskExtenderInitializer {
 
     private TaskExtender extender;

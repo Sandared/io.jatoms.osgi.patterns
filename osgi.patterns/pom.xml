@@ -56,9 +56,9 @@
 
     <modules>
         <module>impl</module>
-        <module>app</module>
         <module>itask.simple</module>
-  </modules>
+        <module>app</module>
+    </modules>
 
     <dependencyManagement>
         <dependencies>
