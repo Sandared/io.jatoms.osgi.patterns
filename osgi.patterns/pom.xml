@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.jatoms</groupId>
@@ -58,7 +57,8 @@
     <modules>
         <module>impl</module>
         <module>app</module>
-    </modules>
+        <module>itask.simple</module>
+  </modules>
 
     <dependencyManagement>
         <dependencies>
@@ -123,7 +123,7 @@ Bundle-SymbolicName: ${project.groupId}.${project.artifactId}
                         </execution>
                     </executions>
                 </plugin>
-                <!-- Required to make the maven-jar-plugin pick up the bnd 
+                <!-- Required to make the maven-jar-plugin pick up the bnd
                     generated manifest. Also avoid packaging empty Jars -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -223,8 +223,8 @@ Bundle-SymbolicName: ${project.groupId}.${project.artifactId}
                     </executions>
                 </plugin>
 
-                <!-- Define the version of the baseline plugin we use and 
-                    avoid failing when no baseline jar exists. (for example before the first 
+                <!-- Define the version of the baseline plugin we use and
+                    avoid failing when no baseline jar exists. (for example before the first
                     release) -->
                 <plugin>
                     <groupId>biz.aQute.bnd</groupId>
